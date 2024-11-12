@@ -1,6 +1,6 @@
 ﻿using ASD_ADP;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Please enter the desired algorithm name!");
 var algorithm = Console.ReadLine();
 
 switch (algorithm)
