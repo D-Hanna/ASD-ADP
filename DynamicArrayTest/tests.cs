@@ -4,7 +4,7 @@ using System;
 namespace DynamicArrayTest
 {
     [TestClass]
-    public class UnitTest1
+    public class tests
     {
         [TestMethod]
         public void TestMethod1()
