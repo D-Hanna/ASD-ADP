@@ -29,9 +29,9 @@ namespace DynamicArrayProj.Models.Tests
         }
 
         [TestMethod()]
-        public void TestDynamicArrayPerformanceWithLijstFloat10000()
+        public void TestDynamicArrayPerformanceWithLijstoplopend10000()
         {
-            var dataset = DataSets.LijstFloat8001;
+            var dataset = DataSets.Lijstoplopend10000;
             var dynamicArray = new DynamicArray<object>();
             Stopwatch sw = Stopwatch.StartNew();
             foreach (var item in dataset)
@@ -44,9 +44,9 @@ namespace DynamicArrayProj.Models.Tests
         }
 
         [TestMethod()]
-        public void TestDynamicArrayPerformanceWithLijstFloat50000()
+        public void TestDynamicArrayPerformanceWithLijstHerhaald1000()
         {
-            var dataset = DataSets.LijstFloat8001;
+            var dataset = DataSets.LijstHerhaald1000;
             var dynamicArray = new DynamicArray<object>();
             Stopwatch sw = Stopwatch.StartNew();
             foreach (var item in dataset)
@@ -61,7 +61,7 @@ namespace DynamicArrayProj.Models.Tests
         [TestMethod()]
         public void TestDynamicArrayRemovePerformance()
         {
-            var dataset = DataSets.LijstWillekeurig3;
+            var dataset = DataSets.LijstFloat8001;
             var dynamicArray = new DynamicArray<object>();
             foreach (var item in dataset)
             {
@@ -100,7 +100,6 @@ namespace DynamicArrayProj.Models.Tests
         {
             var dataset = DataSets.LijstFloat8001;
 
-            // Test DynamicArray performance
             var dynamicArray = new DynamicArray<object>();
             Stopwatch swDynamicArray = Stopwatch.StartNew();
             foreach (var item in dataset)
@@ -110,7 +109,6 @@ namespace DynamicArrayProj.Models.Tests
             swDynamicArray.Stop();
             Console.WriteLine("DynamicArray filled with " + dynamicArray.Count + " items in " + swDynamicArray.Elapsed.TotalMilliseconds + " milliseconds");
 
-            // Test List performance
             var list = new List<object>();
             Stopwatch swList = Stopwatch.StartNew();
             foreach (var item in dataset)
@@ -120,8 +118,35 @@ namespace DynamicArrayProj.Models.Tests
             swList.Stop();
             Console.WriteLine("List filled with " + list.Count + " items in " + swList.Elapsed.TotalMilliseconds + " milliseconds");
 
-            // Assert that both collections have the same number of items
             Assert.IsTrue(dynamicArray.Count == list.Count, "The counts of DynamicArray and List do not match.");
+        }
+
+
+        [TestMethod()]
+        public void CompareDynamicArrayToArrayPerformance()
+        {
+            var dataset = DataSets.LijstFloat8001;
+
+            var dynamicArray = new DynamicArray<object>();
+            Stopwatch swDynamicArray = Stopwatch.StartNew();
+            foreach (var item in dataset)
+            {
+                dynamicArray.Add(item);
+            }
+            swDynamicArray.Stop();
+            Console.WriteLine("DynamicArray filled with " + dynamicArray.Count + " items in " + swDynamicArray.Elapsed.TotalMilliseconds + " milliseconds");
+
+            var array = new object[dataset.Length];
+            Stopwatch swArray = Stopwatch.StartNew();
+            for (int i = 0; i < dataset.Length; i++)
+            {
+                array[i] = dataset[i];
+            }
+            swArray.Stop();
+            Console.WriteLine("Array filled with " + array.Length + " items in " + swArray.Elapsed.TotalMilliseconds + " milliseconds");
+
+            // Assert that both collections have the same number of items
+            Assert.IsTrue(dynamicArray.Count == array.Length, "The counts of DynamicArray and Array do not match.");
         }
     }
 }
