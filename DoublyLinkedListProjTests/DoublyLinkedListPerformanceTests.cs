@@ -18,7 +18,7 @@ namespace DoublyLinkedListProj.Tests
         public void Performance_AddFirst()
         {
             var dataset = DataSets.LijstFloat8001;
-            var list = new DoublyLinkedList<int>();
+            var list = new DoublyLinkedList<object>();
             Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var item in dataset)
             {
@@ -26,14 +26,14 @@ namespace DoublyLinkedListProj.Tests
             }
             stopwatch.Stop();
             Console.WriteLine($"AddFirst: {stopwatch.ElapsedMilliseconds} ms");
-            Assert.AreEqual(100000, list.Count);
+            Assert.AreEqual(dataset.Count(), list.Count);
         }
 
         [TestMethod()]
         public void Performance_AddLast()
         {
             var dataset = DataSets.LijstFloat8001;
-            var list = new DoublyLinkedList<int>();
+            var list = new DoublyLinkedList<object>();
             Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var item in dataset)
             {
@@ -41,14 +41,14 @@ namespace DoublyLinkedListProj.Tests
             }
             stopwatch.Stop();
             Console.WriteLine($"AddLast: {stopwatch.ElapsedMilliseconds} ms");
-            Assert.AreEqual(100000, list.Count);
+            Assert.AreEqual(dataset.Count(), list.Count);
         }
 
         [TestMethod()]
         public void Performance_RemoveFirst()
         {
             var dataset = DataSets.LijstFloat8001;
-            var list = new DoublyLinkedList<int>();
+            var list = new DoublyLinkedList<object>();
             foreach (var item in dataset)
             {
                 list.AddLast(item);
@@ -68,7 +68,7 @@ namespace DoublyLinkedListProj.Tests
         public void Performance_RemoveLast()
         {
             var dataset = DataSets.LijstFloat8001;
-            var list = new DoublyLinkedList<int>();
+            var list = new DoublyLinkedList<object>();
             foreach (var item in dataset)
             {
                 list.AddLast(item);
@@ -88,7 +88,7 @@ namespace DoublyLinkedListProj.Tests
         public void Performance_InsertAt()
         {
             var dataset = DataSets.LijstFloat8001;
-            var list = new DoublyLinkedList<int>();
+            var list = new DoublyLinkedList<object>();
             foreach (var item in dataset)
             {
                 list.AddLast(item);
@@ -107,7 +107,7 @@ namespace DoublyLinkedListProj.Tests
         public void Performance_DeleteAt()
         {
             var dataset = DataSets.LijstFloat8001;
-            var list = new DoublyLinkedList<int>();
+            var list = new DoublyLinkedList<object>();
             foreach (var item in dataset)
             {
                 list.AddLast(item);

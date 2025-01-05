@@ -19,7 +19,7 @@ namespace StackProj.Tests
         public void Compare_Push()
         {
             var dataset = DataSets.RandomList(100000, 0, 100000);
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<dynamic>(dataset.Length);
             Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var item in dataset)
             {
@@ -29,7 +29,7 @@ namespace StackProj.Tests
             Console.WriteLine($"Stack Push: {stopwatch.ElapsedMilliseconds} ms");
             Assert.AreEqual(dataset.Length, stack.Count());
 
-            var list = new List<int>();
+            var list = new List<dynamic>();
             stopwatch.Restart();
             foreach (var item in dataset)
             {
@@ -44,7 +44,7 @@ namespace StackProj.Tests
         public void Compare_Pop()
         {
             var dataset = DataSets.RandomList(100000, 0, 100000);
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<dynamic>(dataset.Length);
             foreach (var item in dataset)
             {
                 stack.Push(item);
@@ -59,7 +59,7 @@ namespace StackProj.Tests
             Console.WriteLine($"Stack Pop: {stopwatch.ElapsedMilliseconds} ms");
             Assert.AreEqual(0, stack.Count());
 
-            var list = new List<int>(dataset);
+            var list = new List<dynamic>(dataset);
             stopwatch.Restart();
             while (list.Count > 0)
             {
@@ -74,7 +74,7 @@ namespace StackProj.Tests
         public void Compare_Peek()
         {
             var dataset = DataSets.RandomList(100000, 0, 100000);
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<dynamic>(dataset.Length);
             foreach (var item in dataset)
             {
                 stack.Push(item);
@@ -88,7 +88,7 @@ namespace StackProj.Tests
             stopwatch.Stop();
             Console.WriteLine($"Stack Peek: {stopwatch.ElapsedMilliseconds} ms");
 
-            var list = new List<int>(dataset);
+            var list = new List<dynamic>(dataset);
             stopwatch.Restart();
             for (int i = 0; i < dataset.Length; i++)
             {
@@ -102,7 +102,7 @@ namespace StackProj.Tests
         public void Compare_IsEmpty()
         {
             var dataset = DataSets.RandomList(100000, 0, 100000);
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<dynamic>(dataset.Length);
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < dataset.Length; i++)
             {
@@ -111,7 +111,7 @@ namespace StackProj.Tests
             stopwatch.Stop();
             Console.WriteLine($"Stack IsEmpty: {stopwatch.ElapsedMilliseconds} ms");
 
-            var list = new List<int>(dataset);
+            var list = new List<dynamic>(dataset);
             stopwatch.Restart();
             for (int i = 0; i < dataset.Length; i++)
             {
@@ -125,7 +125,7 @@ namespace StackProj.Tests
         public void Compare_Count()
         {
             var dataset = DataSets.RandomList(100000, 0, 100000);
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<dynamic>(dataset.Length);
             foreach (var item in dataset)
             {
                 stack.Push(item);
@@ -139,7 +139,7 @@ namespace StackProj.Tests
             stopwatch.Stop();
             Console.WriteLine($"Stack Count: {stopwatch.ElapsedMilliseconds} ms");
 
-            var list = new List<int>(dataset);
+            var list = new List<dynamic>(dataset);
             stopwatch.Restart();
             for (int i = 0; i < dataset.Length; i++)
             {

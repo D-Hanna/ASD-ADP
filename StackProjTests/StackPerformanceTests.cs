@@ -19,7 +19,7 @@ namespace StackProj.Tests
         public void Performance_Push()
         {
             var dataset = DataSets.LijstFloat8001;
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<object>(dataset.Length);
             Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var item in dataset)
             {
@@ -34,7 +34,7 @@ namespace StackProj.Tests
         public void Performance_Pop()
         {
             var dataset = DataSets.LijstFloat8001;
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<object>(dataset.Length);
             foreach (var item in dataset)
             {
                 stack.Push(item);
@@ -54,7 +54,7 @@ namespace StackProj.Tests
         public void Performance_Peek()
         {
             var dataset = DataSets.LijstFloat8001;
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<object>(dataset.Length);
             foreach (var item in dataset)
             {
                 stack.Push(item);
@@ -73,7 +73,7 @@ namespace StackProj.Tests
         public void Performance_IsEmpty()
         {
             var dataset = DataSets.LijstFloat8001;
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<object>(dataset.Length);
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < dataset.Length; i++)
             {
@@ -87,7 +87,7 @@ namespace StackProj.Tests
         public void Performance_Count()
         {
             var dataset = DataSets.LijstFloat8001;
-            var stack = new Stack<int>(dataset.Length);
+            var stack = new Stack<object>(dataset.Length);
             foreach (var item in dataset)
             {
                 stack.Push(item);
