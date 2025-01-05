@@ -38024,5 +38024,27 @@ namespace ASD_ADP
     8009
   ];
         public static dynamic[] LijstWillekeurig3 = [1, 3, 2];
+
+        public static dynamic[] RandomList(int Count = 99999, int minValue = 0, int maxValue = 9)
+        {
+            Random random = new Random();
+            dynamic[] list = new dynamic[Count];
+            for (int i = 0; i < Count; i++)
+            {
+                list[i] = random.Next(minValue, maxValue);
+            }
+            return list;
+        }
+        public static dynamic[] RandomStringList(int count = 99999, int stringLength = 10, string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
+        {
+            Random random = new Random();
+            dynamic[] list = new dynamic[count];
+            for (int i = 0; i < count; i++)
+            {
+                list[i] = new string(Enumerable.Repeat(chars, stringLength)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+            }
+            return list;
+        }
     }
 }

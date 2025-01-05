@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using ASD_ADP;
+using System.Data;
 
 namespace DoublyLinkedListProj.Tests
 {
@@ -13,13 +15,15 @@ namespace DoublyLinkedListProj.Tests
     public class DoublyLinkedListPerformanceComparisonTests
     {
         [TestMethod()]
-        public void Performance_AddFirst()
+        public void Compare_AddFirst()
         {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
+
             var list = new DoublyLinkedList<int>();
             Stopwatch stopwatch = Stopwatch.StartNew();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                list.AddFirst(i);
+                list.AddFirst(item);
             }
             stopwatch.Stop();
             Console.WriteLine($"DoublyLinkedList AddFirst: {stopwatch.ElapsedMilliseconds} ms");
@@ -27,9 +31,9 @@ namespace DoublyLinkedListProj.Tests
 
             var normalList = new List<int>();
             stopwatch.Restart();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                normalList.Insert(0, i);
+                normalList.Insert(0, item);
             }
             stopwatch.Stop();
             Console.WriteLine($"List AddFirst: {stopwatch.ElapsedMilliseconds} ms");
@@ -37,13 +41,14 @@ namespace DoublyLinkedListProj.Tests
         }
 
         [TestMethod()]
-        public void Performance_AddLast()
+        public void Compare_AddLast()
         {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var list = new DoublyLinkedList<int>();
             Stopwatch stopwatch = Stopwatch.StartNew();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
             stopwatch.Stop();
             Console.WriteLine($"DoublyLinkedList AddLast: {stopwatch.ElapsedMilliseconds} ms");
@@ -51,9 +56,9 @@ namespace DoublyLinkedListProj.Tests
 
             var normalList = new List<int>();
             stopwatch.Restart();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                normalList.Add(i);
+                normalList.Add(item);
             }
             stopwatch.Stop();
             Console.WriteLine($"List AddLast: {stopwatch.ElapsedMilliseconds} ms");
@@ -61,12 +66,13 @@ namespace DoublyLinkedListProj.Tests
         }
 
         [TestMethod()]
-        public void Performance_RemoveFirst()
+        public void Compare_RemoveFirst()
         {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var list = new DoublyLinkedList<int>();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -79,9 +85,9 @@ namespace DoublyLinkedListProj.Tests
             Assert.AreEqual(0, list.Count);
 
             var normalList = new List<int>();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                normalList.Add(i);
+                normalList.Add(item);
             }
 
             stopwatch.Restart();
@@ -95,12 +101,13 @@ namespace DoublyLinkedListProj.Tests
         }
 
         [TestMethod()]
-        public void Performance_RemoveLast()
+        public void Compare_RemoveLast()
         {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var list = new DoublyLinkedList<int>();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -113,9 +120,9 @@ namespace DoublyLinkedListProj.Tests
             Assert.AreEqual(0, list.Count);
 
             var normalList = new List<int>();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                normalList.Add(i);
+                normalList.Add(item);
             }
 
             stopwatch.Restart();
@@ -129,12 +136,13 @@ namespace DoublyLinkedListProj.Tests
         }
 
         [TestMethod()]
-        public void Performance_InsertAt()
+        public void Compare_InsertAt()
         {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var list = new DoublyLinkedList<int>();
-            for (int i = 0; i < 10000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -146,9 +154,9 @@ namespace DoublyLinkedListProj.Tests
             Console.WriteLine($"DoublyLinkedList InsertAt: {stopwatch.ElapsedMilliseconds} ms");
 
             var normalList = new List<int>();
-            for (int i = 0; i < 10000; i++)
+            foreach (var item in dataset)
             {
-                normalList.Add(i);
+                normalList.Add(item);
             }
 
             stopwatch.Restart();
@@ -161,12 +169,13 @@ namespace DoublyLinkedListProj.Tests
         }
 
         [TestMethod()]
-        public void Performance_DeleteAt()
+        public void Compare_DeleteAt()
         {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var list = new DoublyLinkedList<int>();
-            for (int i = 0; i < 10000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -178,9 +187,9 @@ namespace DoublyLinkedListProj.Tests
             Console.WriteLine($"DoublyLinkedList DeleteAt: {stopwatch.ElapsedMilliseconds} ms");
 
             var normalList = new List<int>();
-            for (int i = 0; i < 10000; i++)
+            foreach (var item in dataset)
             {
-                normalList.Add(i);
+                normalList.Add(item);
             }
 
             stopwatch.Restart();
