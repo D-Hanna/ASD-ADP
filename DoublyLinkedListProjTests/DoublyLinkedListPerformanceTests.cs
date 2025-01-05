@@ -17,11 +17,12 @@ namespace DoublyLinkedListProj.Tests
         [TestMethod()]
         public void Performance_AddFirst()
         {
+            var dataset = DataSets.LijstFloat8001;
             var list = new DoublyLinkedList<int>();
             Stopwatch stopwatch = Stopwatch.StartNew();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                list.AddFirst(i);
+                list.AddFirst(item);
             }
             stopwatch.Stop();
             Console.WriteLine($"AddFirst: {stopwatch.ElapsedMilliseconds} ms");
@@ -31,11 +32,12 @@ namespace DoublyLinkedListProj.Tests
         [TestMethod()]
         public void Performance_AddLast()
         {
+            var dataset = DataSets.LijstFloat8001;
             var list = new DoublyLinkedList<int>();
             Stopwatch stopwatch = Stopwatch.StartNew();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
             stopwatch.Stop();
             Console.WriteLine($"AddLast: {stopwatch.ElapsedMilliseconds} ms");
@@ -45,10 +47,11 @@ namespace DoublyLinkedListProj.Tests
         [TestMethod()]
         public void Performance_RemoveFirst()
         {
+            var dataset = DataSets.LijstFloat8001;
             var list = new DoublyLinkedList<int>();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -64,10 +67,11 @@ namespace DoublyLinkedListProj.Tests
         [TestMethod()]
         public void Performance_RemoveLast()
         {
+            var dataset = DataSets.LijstFloat8001;
             var list = new DoublyLinkedList<int>();
-            for (int i = 0; i < 100000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -83,10 +87,11 @@ namespace DoublyLinkedListProj.Tests
         [TestMethod()]
         public void Performance_InsertAt()
         {
+            var dataset = DataSets.LijstFloat8001;
             var list = new DoublyLinkedList<int>();
-            for (int i = 0; i < 10000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -101,10 +106,11 @@ namespace DoublyLinkedListProj.Tests
         [TestMethod()]
         public void Performance_DeleteAt()
         {
+            var dataset = DataSets.LijstFloat8001;
             var list = new DoublyLinkedList<int>();
-            for (int i = 0; i < 10000; i++)
+            foreach (var item in dataset)
             {
-                list.AddLast(i);
+                list.AddLast(item);
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();

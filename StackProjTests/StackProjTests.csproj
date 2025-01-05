@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ASD_ADP\ASD_ADP.csproj" />
     <ProjectReference Include="..\StackProj\StackProj.csproj" />
   </ItemGroup>
 

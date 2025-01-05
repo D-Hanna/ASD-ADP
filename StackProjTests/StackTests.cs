@@ -45,7 +45,7 @@ namespace StackProj.Tests
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void PopTest_StackUnderflow()
+        public void PopTest_StackUnderflow()  
         {
             var stack = new Stack<int>(5);
             stack.Pop();
