@@ -14,6 +14,7 @@ namespace DoublyLinkedListProj.Tests
     [TestClass()]
     public class DoublyLinkedListPerformanceComparisonTests
     {
+        //compare performance against normal list
         [TestMethod()]
         public void Compare_AddFirst()
         {
@@ -199,6 +200,208 @@ namespace DoublyLinkedListProj.Tests
             }
             stopwatch.Stop();
             Console.WriteLine($"List DeleteAt: {stopwatch.ElapsedMilliseconds} ms");
+        }
+
+        //compare performance against linked list
+
+        [TestMethod()]
+        public void Compare_AddFirstAgainstLinkedList()
+        {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
+            var doublyLinkedList = new DoublyLinkedList<int>();
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            foreach (var item in dataset)
+            {
+                doublyLinkedList.AddFirst(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"DoublyLinkedList AddFirst: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(100000, doublyLinkedList.Count);
+
+            var linkedList = new LinkedList<int>();
+            stopwatch.Restart();
+            foreach (var item in dataset)
+            {
+                linkedList.AddFirst(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"LinkedList AddFirst: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(100000, linkedList.Count);
+        }
+
+        [TestMethod()]
+        public void Compare_AddLastAgainstLinkedList()
+        {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
+            var doublyLinkedList = new DoublyLinkedList<int>();
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            foreach (var item in dataset)
+            {
+                doublyLinkedList.AddLast(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"DoublyLinkedList AddLast: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(100000, doublyLinkedList.Count);
+
+            var linkedList = new LinkedList<int>();
+            stopwatch.Restart();
+            foreach (var item in dataset)
+            {
+                linkedList.AddLast(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"LinkedList AddLast: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(100000, linkedList.Count);
+        }
+
+        [TestMethod()]
+        public void Compare_RemoveFirstAgainstLinkedList()
+        {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
+            var doublyLinkedList = new DoublyLinkedList<int>();
+            foreach (var item in dataset)
+            {
+                doublyLinkedList.AddLast(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            while (doublyLinkedList.Count > 0)
+            {
+                doublyLinkedList.RemoveFirst();
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"DoublyLinkedList RemoveFirst: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, doublyLinkedList.Count);
+
+            var linkedList = new LinkedList<int>();
+            foreach (var item in dataset)
+            {
+                linkedList.AddLast(item);
+            }
+
+            stopwatch.Restart();
+            while (linkedList.Count > 0)
+            {
+                linkedList.RemoveFirst();
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"LinkedList RemoveFirst: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, linkedList.Count);
+        }
+
+        [TestMethod()]
+        public void Compare_RemoveLastAgainstLinkedList()
+        {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
+            var doublyLinkedList = new DoublyLinkedList<int>();
+            foreach (var item in dataset)
+            {
+                doublyLinkedList.AddLast(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            while (doublyLinkedList.Count > 0)
+            {
+                doublyLinkedList.RemoveLast();
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"DoublyLinkedList RemoveLast: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, doublyLinkedList.Count);
+
+            var linkedList = new LinkedList<int>();
+            foreach (var item in dataset)
+            {
+                linkedList.AddLast(item);
+            }
+
+            stopwatch.Restart();
+            while (linkedList.Count > 0)
+            {
+                linkedList.RemoveLast();
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"LinkedList RemoveLast: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, linkedList.Count);
+        }
+
+        [TestMethod()]
+        public void Compare_InsertAtAgainstLinkedList()
+        {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
+            var doublyLinkedList = new DoublyLinkedList<int>();
+            foreach (var item in dataset)
+            {
+                doublyLinkedList.AddLast(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            for (int i = 0; i < 1000; i++)
+            {
+                doublyLinkedList.InsertAt(i, doublyLinkedList.Count / 2);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"DoublyLinkedList InsertAt: {stopwatch.ElapsedMilliseconds} ms");
+
+            var linkedList = new LinkedList<int>();
+            foreach (var item in dataset)
+            {
+                linkedList.AddLast(item);
+            }
+            stopwatch.Restart();
+            var node = linkedList.First;
+            for (int i = 0; i < 1000; i++)
+            {
+                for (int j = 0; j < linkedList.Count / 2; j++)
+                {
+                    node = node.Next;
+                }
+                if(node == null)
+                {
+                    break; // reached end
+                }
+                linkedList.AddBefore(node, i);
+            }
+            stopwatch.Stop();
+
+            Console.WriteLine($"LinkedList InsertAt: {stopwatch.ElapsedMilliseconds} ms");
+        }
+
+        [TestMethod()]
+        public void Compare_DeleteAtAgainstLinkedList()
+        {
+            var dataset = DataSets.RandomList(100000, 0, 100000);
+            var doublyLinkedList = new DoublyLinkedList<int>();
+            foreach (var item in dataset)
+            {
+                doublyLinkedList.AddLast(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            while (doublyLinkedList.Count > 0)
+            {
+                doublyLinkedList.DeleteAt(doublyLinkedList.Count / 2);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"DoublyLinkedList DeleteAt: {stopwatch.ElapsedMilliseconds} ms");
+
+            var linkedList = new LinkedList<int>();
+            foreach (var item in dataset)
+            {
+                linkedList.AddLast(item);
+            }
+
+            stopwatch.Restart();
+            while (linkedList.Count > 0)
+            {
+                var node = linkedList.First;
+                for (int i = 0; i < linkedList.Count / 2; i++)
+                {
+                    node = node.Next;
+                }
+                linkedList.Remove(node);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"LinkedList DeleteAt: {stopwatch.ElapsedMilliseconds} ms");
         }
     }
 }
