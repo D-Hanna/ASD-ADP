@@ -5,20 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ASD_ADP;
-using System.Diagnostics;
 using System.Data;
+using System.Diagnostics;
+using ASD_ADP;
 
 namespace DynamicArrayProj.Models.Tests
 {
     [TestClass()]
-    public class DynamicArrayPerformanceTests
+    public class DynamicArrayComparePerformanceTests
     {
-
-        [TestMethod()]
-        public void Performance_Add()
+                [TestMethod()]
+        public void Compare_Add()
         {
-            var dataset = DataSets.LijstFloat8001;
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var dynamicArray = new DynamicArray<object>();
             Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var item in dataset)
@@ -28,12 +27,22 @@ namespace DynamicArrayProj.Models.Tests
             stopwatch.Stop();
             Console.WriteLine($"DynamicArray Add: {stopwatch.ElapsedMilliseconds} ms");
             Assert.AreEqual(dataset.Length, dynamicArray.Count);
+
+            var list = new List<object>();
+            stopwatch.Restart();
+            foreach (var item in dataset)
+            {
+                list.Add(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"List Add: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(dataset.Length, list.Count);
         }
 
         [TestMethod()]
-        public void Performance_RemoveAt()
+        public void Compare_RemoveAt()
         {
-            var dataset = DataSets.LijstFloat8001;
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var dynamicArray = new DynamicArray<object>();
             foreach (var item in dataset)
             {
@@ -48,12 +57,22 @@ namespace DynamicArrayProj.Models.Tests
             stopwatch.Stop();
             Console.WriteLine($"DynamicArray RemoveAt: {stopwatch.ElapsedMilliseconds} ms");
             Assert.AreEqual(0, dynamicArray.Count);
+
+            var list = new List<object>(dataset);
+            stopwatch.Restart();
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                list.RemoveAt(i);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"List RemoveAt: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, list.Count);
         }
 
         [TestMethod()]
-        public void Performance_Get()
+        public void Compare_Get()
         {
-            var dataset = DataSets.LijstFloat8001;
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var dynamicArray = new DynamicArray<object>();
             foreach (var item in dataset)
             {
@@ -67,12 +86,21 @@ namespace DynamicArrayProj.Models.Tests
             }
             stopwatch.Stop();
             Console.WriteLine($"DynamicArray Get: {stopwatch.ElapsedMilliseconds} ms");
+
+            var list = new List<object>(dataset);
+            stopwatch.Restart();
+            for (int i = 0; i < list.Count; i++)
+            {
+                var item = list[i];
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"List Get: {stopwatch.ElapsedMilliseconds} ms");
         }
 
         [TestMethod()]
-        public void Performance_Set()
+        public void Compare_Set()
         {
-            var dataset = DataSets.LijstFloat8001;
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var dynamicArray = new DynamicArray<object>();
             foreach (var item in dataset)
             {
@@ -86,12 +114,21 @@ namespace DynamicArrayProj.Models.Tests
             }
             stopwatch.Stop();
             Console.WriteLine($"DynamicArray Set: {stopwatch.ElapsedMilliseconds} ms");
+
+            var list = new List<object>(dataset);
+            stopwatch.Restart();
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i] = dataset[i];
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"List Set: {stopwatch.ElapsedMilliseconds} ms");
         }
 
         [TestMethod()]
-        public void Performance_Clear()
+        public void Compare_Clear()
         {
-            var dataset = DataSets.LijstFloat8001;
+            var dataset = DataSets.RandomList(100000, 0, 100000);
             var dynamicArray = new DynamicArray<object>();
             foreach (var item in dataset)
             {
@@ -103,6 +140,13 @@ namespace DynamicArrayProj.Models.Tests
             stopwatch.Stop();
             Console.WriteLine($"DynamicArray Clear: {stopwatch.ElapsedMilliseconds} ms");
             Assert.AreEqual(0, dynamicArray.Count);
+
+            var list = new List<object>(dataset);
+            stopwatch.Restart();
+            list.Clear();
+            stopwatch.Stop();
+            Console.WriteLine($"List Clear: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, list.Count);
         }
     }
 }
