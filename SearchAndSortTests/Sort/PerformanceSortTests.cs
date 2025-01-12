@@ -81,6 +81,30 @@ namespace SearchAndSort.Sort.Tests
             }
         }
 
+        //merge sort
+        [TestMethod]
+        public void Test_MergeSortPerformance()
+        {
+            int[] array = new int[10000];
+            var random = new Random();
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = random.Next(0, 10000);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            MergeSort.Sort(array);
+            stopwatch.Stop();
+
+            Console.WriteLine($"MergeSort Time: {stopwatch.ElapsedMilliseconds} ms");
+
+            // Verify the array is sorted
+            for (int i = 1; i < array.Length; i++)
+            {
+                Assert.IsTrue(array[i - 1] <= array[i]);
+            }
+        }
+
         [TestMethod]
         public void Compare_SortPerformance()
         {
@@ -133,10 +157,25 @@ namespace SearchAndSort.Sort.Tests
                 Assert.IsTrue(quickSortList[i - 1] <= quickSortList[i]);
             }
 
+            // MergeSort
+            var mergeSortArray = originalList.ToArray();
+            stopwatch.Restart();
+            MergeSort.Sort(mergeSortArray);
+            stopwatch.Stop();
+            var mergeSortTime = stopwatch.ElapsedMilliseconds;
+            Console.WriteLine($"MergeSort Time: {mergeSortTime} ms");
+
+            // Verify the array is sorted
+            for (int i = 1; i < mergeSortArray.Length; i++)
+            {
+                Assert.IsTrue(mergeSortArray[i - 1] <= mergeSortArray[i]);
+            }
+
             // Print comparison results
             Console.WriteLine($"InsertionSort Time: {insertionSortTime} ms");
             Console.WriteLine($"SelectionSort Time: {selectionSortTime} ms");
             Console.WriteLine($"QuickSort Time: {quickSortTime} ms");
+            Console.WriteLine($"MergeSort Time: {mergeSortTime} ms");
         }
     }
 }

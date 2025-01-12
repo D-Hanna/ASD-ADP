@@ -175,5 +175,60 @@ namespace SearchAndSort.Sort.Tests
 
             CollectionAssert.AreEqual(new List<int> { 1, 3, 3, 3, 5, 8, 9 }, list);
         }
+
+        //merge sort
+        [TestMethod]
+        public void Test_Merge_Sort_AlreadySorted()
+        {
+            int[] array = { 1, 2, 3, 4, 5 };
+            MergeSort.Sort(array);
+
+            CollectionAssert.AreEqual(new int[] { 1, 2, 3, 4, 5 }, array);
+        }
+
+        [TestMethod]
+        public void Test_Merge_Sort_ReverseSorted()
+        {
+            int[] array = { 5, 4, 3, 2, 1 };
+            MergeSort.Sort(array);
+
+            CollectionAssert.AreEqual(new int[] { 1, 2, 3, 4, 5 }, array);
+        }
+
+        [TestMethod]
+        public void Test_Merge_Sort_Unsorted()
+        {
+            int[] array = { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5 };
+            MergeSort.Sort(array);
+
+            CollectionAssert.AreEqual(new int[] { 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9 }, array);
+        }
+
+        [TestMethod]
+        public void Test_Merge_ort_EmptyArray()
+        {
+            int[] array = { };
+            MergeSort.Sort(array);
+
+            CollectionAssert.AreEqual(new int[] { }, array);
+        }
+
+        [TestMethod]
+        public void Test_Merge_Sort_SingleElement()
+        {
+            int[] array = { 42 };
+            MergeSort.Sort(array);
+
+            CollectionAssert.AreEqual(new int[] { 42 }, array);
+        }
+
+        [TestMethod]
+        public void Test_Merge_Sort_DuplicateElements()
+        {
+            int[] array = { 5, 3, 8, 3, 9, 1, 3 };
+            MergeSort.Sort(array);
+
+            CollectionAssert.AreEqual(new int[] { 1, 3, 3, 3, 5, 8, 9 }, array);
+        }
     }
 }
