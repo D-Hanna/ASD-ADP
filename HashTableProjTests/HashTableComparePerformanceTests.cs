@@ -59,7 +59,7 @@ namespace HashTableProj.Tests
             Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var item in dataset)
             {
-                customHashTable.TryGetValue(item, out _);
+                customHashTable.TryGetValue(item, out string _);
             }
             stopwatch.Stop();
             var customHashTableGetTime = stopwatch.ElapsedMilliseconds;
@@ -69,7 +69,7 @@ namespace HashTableProj.Tests
             stopwatch.Restart();
             foreach (var item in dataset)
             {
-                dictionary.TryGetValue(item, out _);
+                dictionary.TryGetValue(item, out string _);
             }
             stopwatch.Stop();
             var dictionaryGetTime = stopwatch.ElapsedMilliseconds;
