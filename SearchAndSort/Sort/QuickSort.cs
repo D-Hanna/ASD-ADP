@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SearchAndSort.Sort
 {
     public class QuickSort
     {
-        public static void Sort(List<int> arr)
+        public static void Sort(int[] arr)
         {
-            Sort(arr, 0, arr.Count - 1);
+            Sort(arr, 0, arr.Length - 1);
         }
-        public static void Sort(List<int> arr, int low, int high)
+
+        public static void Sort(int[] arr, int low, int high)
         {
             if (low < high)
             {
@@ -23,7 +20,7 @@ namespace SearchAndSort.Sort
             }
         }
 
-        static int Partition(List<int> arr, int low, int high)
+        static int Partition(int[] arr, int low, int high)
         {
             int pivot = arr[high];
             int i = low - 1;
@@ -42,7 +39,7 @@ namespace SearchAndSort.Sort
             return i + 1;
         }
 
-        static void Swap(List<int> arr, int i, int j)
+        static void Swap(int[] arr, int i, int j)
         {
             int temp = arr[i];
             arr[i] = arr[j];

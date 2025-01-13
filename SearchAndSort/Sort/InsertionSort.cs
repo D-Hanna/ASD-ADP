@@ -1,25 +1,24 @@
-﻿
-namespace SearchAndSort.Sort
+﻿namespace SearchAndSort.Sort
 {
     public class InsertionSort
     {
-        public static List<T> Sort<T>(List<T> list) where T : IComparable<T>
+        public static T[] Sort<T>(T[] array) where T : IComparable<T>
         {
-            for (int i = 1; i < list.Count; i++)
+            for (int i = 1; i < array.Length; i++)
             {
-                T key = list[i];
+                T key = array[i];
                 int j = i - 1;
 
-                while (j >= 0 && list[j].CompareTo(key) > 0)
+                while (j >= 0 && array[j].CompareTo(key) > 0)
                 {
-                    list[j + 1] = list[j];
+                    array[j + 1] = array[j];
                     j--;
                 }
 
-                list[j + 1] = key;
+                array[j + 1] = key;
             }
 
-            return list;
+            return array;
         }
     }
 }

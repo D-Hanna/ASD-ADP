@@ -16,20 +16,15 @@ namespace SearchAndSort.Sort.Tests
         [TestMethod]
         public void Test_InsertionSortPerformance()
         {
-            var list = new List<int>();
-            var random = new Random();
-            for (int i = 0; i < 10000; i++)
-            {
-                list.Add(random.Next(0, 10000));
-            }
+            var list = DataSets.RandomList(10000, 0, 10000).OfType<int>().ToList();
 
             Stopwatch stopwatch = Stopwatch.StartNew();
-            var sortedList = InsertionSort.Sort(list);
+            var sortedList = InsertionSort.Sort(list.ToArray());
             stopwatch.Stop();
 
             Console.WriteLine($"InsertionSort Time: {stopwatch.ElapsedMilliseconds} ms");
 
-            for (int i = 1; i < sortedList.Count; i++)
+            for (int i = 1; i < sortedList.Count(); i++)
             {
                 Assert.IsTrue(sortedList[i - 1].CompareTo(sortedList[i]) <= 0);
             }
@@ -39,12 +34,8 @@ namespace SearchAndSort.Sort.Tests
         [TestMethod]
         public void Test_SelectionSortPerformance()
         {
-            int[] array = new int[10000];
-            var random = new Random();
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = random.Next(0, 10000);
-            }
+            var list = DataSets.RandomList(10000, 0, 10000).OfType<int>().ToList();
+            var array = list.ToArray();
 
             Stopwatch stopwatch = Stopwatch.StartNew();
             SelectionSort.Sort(array);
@@ -62,22 +53,18 @@ namespace SearchAndSort.Sort.Tests
         [TestMethod]
         public void Test_QuickSortPerformance()
         {
-            var list = new List<int>();
-            var random = new Random();
-            for (int i = 0; i < 10000; i++)
-            {
-                list.Add(random.Next(0, 10000));
-            }
+            var list = DataSets.RandomList(10000, 0, 10000).OfType<int>().ToList();
+            var array = list.ToArray();
 
             Stopwatch stopwatch = Stopwatch.StartNew();
-            QuickSort.Sort(list);
+            QuickSort.Sort(array);
             stopwatch.Stop();
 
             Console.WriteLine($"QuickSort Time: {stopwatch.ElapsedMilliseconds} ms");
 
-            for (int i = 1; i < list.Count; i++)
+            for (int i = 1; i < array.Length; i++)
             {
-                Assert.IsTrue(list[i - 1] <= list[i]);
+                Assert.IsTrue(array[i - 1] <= array[i]);
             }
         }
 
@@ -85,12 +72,8 @@ namespace SearchAndSort.Sort.Tests
         [TestMethod]
         public void Test_MergeSortPerformance()
         {
-            int[] array = new int[10000];
-            var random = new Random();
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = random.Next(0, 10000);
-            }
+            var list = DataSets.RandomList(10000, 0, 10000).OfType<int>().ToList();
+            var array = list.ToArray();
 
             Stopwatch stopwatch = Stopwatch.StartNew();
             MergeSort.Sort(array);
@@ -98,7 +81,6 @@ namespace SearchAndSort.Sort.Tests
 
             Console.WriteLine($"MergeSort Time: {stopwatch.ElapsedMilliseconds} ms");
 
-            // Verify the array is sorted
             for (int i = 1; i < array.Length; i++)
             {
                 Assert.IsTrue(array[i - 1] <= array[i]);
@@ -116,7 +98,7 @@ namespace SearchAndSort.Sort.Tests
             List<int> originalList = DataSets.RandomList(listSize, minValue, maxValue).OfType<int>().ToList();
 
             // InsertionSort
-            var insertionSortList = new List<int>(originalList);
+            var insertionSortList = originalList.ToArray();
             Stopwatch stopwatch = Stopwatch.StartNew();
             var sortedInsertionList = InsertionSort.Sort(insertionSortList);
             stopwatch.Stop();
@@ -124,7 +106,7 @@ namespace SearchAndSort.Sort.Tests
             Console.WriteLine($"InsertionSort Time: {insertionSortTime} ms");
 
             // Verify the list is sorted
-            for (int i = 1; i < sortedInsertionList.Count; i++)
+            for (int i = 1; i < sortedInsertionList.Length; i++)
             {
                 Assert.IsTrue(sortedInsertionList[i - 1].CompareTo(sortedInsertionList[i]) <= 0);
             }
@@ -144,7 +126,7 @@ namespace SearchAndSort.Sort.Tests
             }
 
             // QuickSort
-            var quickSortList = new List<int>(originalList);
+            var quickSortList = originalList.ToArray();
             stopwatch.Restart();
             QuickSort.Sort(quickSortList);
             stopwatch.Stop();
@@ -152,7 +134,7 @@ namespace SearchAndSort.Sort.Tests
             Console.WriteLine($"QuickSort Time: {quickSortTime} ms");
 
             // Verify the list is sorted
-            for (int i = 1; i < quickSortList.Count; i++)
+            for (int i = 1; i < quickSortList.Length; i++)
             {
                 Assert.IsTrue(quickSortList[i - 1] <= quickSortList[i]);
             }
@@ -170,12 +152,6 @@ namespace SearchAndSort.Sort.Tests
             {
                 Assert.IsTrue(mergeSortArray[i - 1] <= mergeSortArray[i]);
             }
-
-            // Print comparison results
-            Console.WriteLine($"InsertionSort Time: {insertionSortTime} ms");
-            Console.WriteLine($"SelectionSort Time: {selectionSortTime} ms");
-            Console.WriteLine($"QuickSort Time: {quickSortTime} ms");
-            Console.WriteLine($"MergeSort Time: {mergeSortTime} ms");
         }
     }
 }

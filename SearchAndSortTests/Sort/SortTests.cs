@@ -15,7 +15,7 @@ namespace SearchAndSort.Sort.Tests
         public void Test_Sort_AlreadySorted()
         {
             var list = new List<int> { 1, 2, 3, 4, 5 };
-            var sortedList = InsertionSort.Sort(list);
+            var sortedList = InsertionSort.Sort(list.ToArray());
 
             CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, sortedList);
         }
@@ -24,7 +24,7 @@ namespace SearchAndSort.Sort.Tests
         public void Test_Sort_ReverseSorted()
         {
             var list = new List<int> { 5, 4, 3, 2, 1 };
-            var sortedList = InsertionSort.Sort(list);
+            var sortedList = InsertionSort.Sort(list.ToArray());
 
             CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, sortedList);
         }
@@ -33,7 +33,7 @@ namespace SearchAndSort.Sort.Tests
         public void Test_Sort_Unsorted()
         {
             var list = new List<int> { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5 };
-            var sortedList = InsertionSort.Sort(list);
+            var sortedList = InsertionSort.Sort(list.ToArray());
 
             CollectionAssert.AreEqual(new List<int> { 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9 }, sortedList);
         }
@@ -42,7 +42,7 @@ namespace SearchAndSort.Sort.Tests
         public void Test_Sort_EmptyList()
         {
             var list = new List<int>();
-            var sortedList = InsertionSort.Sort(list);
+            var sortedList = InsertionSort.Sort(list.ToArray());
 
             CollectionAssert.AreEqual(new List<int>(), sortedList);
         }
@@ -51,7 +51,7 @@ namespace SearchAndSort.Sort.Tests
         public void Test_Sort_SingleElement()
         {
             var list = new List<int> { 42 };
-            var sortedList = InsertionSort.Sort(list);
+            var sortedList = InsertionSort.Sort(list.ToArray());
 
             CollectionAssert.AreEqual(new List<int> { 42 }, sortedList);
         }
@@ -60,7 +60,7 @@ namespace SearchAndSort.Sort.Tests
         public void Test_Sort_DuplicateElements()
         {
             var list = new List<int> { 5, 3, 8, 3, 9, 1, 3 };
-            var sortedList = InsertionSort.Sort(list);
+            var sortedList = InsertionSort.Sort(list.ToArray());
 
             CollectionAssert.AreEqual(new List<int> { 1, 3, 3, 3, 5, 8, 9 }, sortedList);
         }
@@ -126,7 +126,7 @@ namespace SearchAndSort.Sort.Tests
         public void Test_Quick_Sort_AlreadySorted()
         {
             var list = new List<int> { 1, 2, 3, 4, 5 };
-            QuickSort.Sort(list);
+            QuickSort.Sort(list.ToArray());
 
             CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, list);
         }
@@ -134,46 +134,46 @@ namespace SearchAndSort.Sort.Tests
         [TestMethod]
         public void Test_Quick_Sort_ReverseSorted()
         {
-            var list = new List<int> { 5, 4, 3, 2, 1 };
+            var list = new int[] { 5, 4, 3, 2, 1 };
             QuickSort.Sort(list);
 
-            CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, list);
+            CollectionAssert.AreEqual(new int[] { 1, 2, 3, 4, 5 }, list);
         }
 
         [TestMethod]
         public void Test_Quick_Sort_Unsorted()
         {
-            var list = new List<int> { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5 };
+            var list = new int[] { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5 };
             QuickSort.Sort(list);
 
-            CollectionAssert.AreEqual(new List<int> { 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9 }, list);
+            CollectionAssert.AreEqual(new int[] { 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9 }, list);
         }
 
         [TestMethod]
         public void Test_Quick_Sort_EmptyList()
         {
-            var list = new List<int>();
+            var list = new int[] { };
             QuickSort.Sort(list);
 
-            CollectionAssert.AreEqual(new List<int>(), list);
+            CollectionAssert.AreEqual(new int[] { }, list);
         }
 
         [TestMethod]
         public void Test_Quick_Sort_SingleElement()
         {
-            var list = new List<int> { 42 };
+            var list = new int[] { 42 };
             QuickSort.Sort(list);
 
-            CollectionAssert.AreEqual(new List<int> { 42 }, list);
+            CollectionAssert.AreEqual(new int[] { 42 }, list);
         }
 
         [TestMethod]
         public void Test_Quick_Sort_DuplicateElements()
         {
-            var list = new List<int> { 5, 3, 8, 3, 9, 1, 3 };
+            var list = new int[] { 5, 3, 8, 3, 9, 1, 3 };
             QuickSort.Sort(list);
 
-            CollectionAssert.AreEqual(new List<int> { 1, 3, 3, 3, 5, 8, 9 }, list);
+            CollectionAssert.AreEqual(new int[] { 1, 3, 3, 3, 5, 8, 9 }, list);
         }
 
         //merge sort

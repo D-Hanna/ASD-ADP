@@ -14,7 +14,7 @@ namespace DynamicArrayProj.Models.Tests
     [TestClass()]
     public class DynamicArrayComparePerformanceTests
     {
-                [TestMethod()]
+        [TestMethod()]
         public void Compare_Add()
         {
             var dataset = DataSets.RandomList(100000, 0, 100000);
