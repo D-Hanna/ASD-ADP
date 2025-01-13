@@ -1,51 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphProj
 {
-    public class Graph
+    public class Graph<T> where T : notnull
     {
-        private int Vertices;
-        private Dictionary<int, List<(int, int)>> adjList;
+        private Dictionary<T, List<(T Neighbor, int Weight)>> adjList;
 
-        public Graph(int vertices)
+        public Graph()
         {
-            Vertices = vertices;
-            adjList = new Dictionary<int, List<(int, int)>>();
+            adjList = new Dictionary<T, List<(T, int)>>();
+        }
 
-            for (int i = 0; i < vertices; i++)
+        public void AddVertex(T vertex)
+        {
+            if (!adjList.ContainsKey(vertex))
             {
-                adjList[i] = new List<(int, int)>();
+                adjList[vertex] = new List<(T, int)>();
             }
         }
 
-        public void AddEdge(int u, int v, int weight = 1, bool isDirected = false)
+        public void AddEdge(T u, T v, int weight = 1, bool isDirected = false)
         {
+            if (weight < 0)
+            {
+                throw new ArgumentException("Edge weight cannot be negative", nameof(weight));
+            }
+            if (!adjList.ContainsKey(u))
+            {
+                AddVertex(u);
+            }
+            if (!adjList.ContainsKey(v))
+            {
+                AddVertex(v);
+            }
+
             adjList[u].Add((v, weight));
+
             if (!isDirected)
             {
                 adjList[v].Add((u, weight));
             }
         }
 
-        public void Display()
-        {
-            Console.WriteLine("Graph Adjacency List:");
-            foreach (var vertex in adjList)
-            {
-                Console.Write($"Vertex {vertex.Key}: ");
-                foreach (var edge in vertex.Value)
-                {
-                    Console.Write($"-> {edge.Item1}(Weight: {edge.Item2}) ");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        public List<(int, int)> GetNeighbors(int vertex)
+        public List<(T Neighbor, int Weight)> GetNeighbors(T vertex)
         {
             if (adjList.ContainsKey(vertex))
             {
@@ -54,8 +52,48 @@ namespace GraphProj
             else
             {
                 Console.WriteLine($"Vertex {vertex} does not exist.");
-                return new List<(int, int)>();
+                return new List<(T, int)>();
             }
+        }
+
+        public Dictionary<T, int> Dijkstra(T source)
+        {
+            var distances = new Dictionary<T, int>();
+            var priorityQueue = new SortedSet<(int Distance, T Vertex)>();
+            var visited = new HashSet<T>();
+
+            foreach (var vertex in adjList.Keys)
+            {
+                distances[vertex] = int.MaxValue;
+            }
+            distances[source] = 0;
+
+            priorityQueue.Add((0, source));
+
+            while (priorityQueue.Count > 0)
+            {
+                var (currentDistance, currentVertex) = priorityQueue.Min;
+                priorityQueue.Remove(priorityQueue.Min);
+
+                if (visited.Contains(currentVertex)) continue;
+                visited.Add(currentVertex);
+
+                foreach (var (neighbor, weight) in GetNeighbors(currentVertex))
+                {
+                    if (visited.Contains(neighbor)) continue;
+
+                    int newDistance = currentDistance + weight;
+
+                    if (newDistance < distances[neighbor])
+                    {
+                        priorityQueue.Remove((distances[neighbor], neighbor));
+                        distances[neighbor] = newDistance;
+                        priorityQueue.Add((newDistance, neighbor));
+                    }
+                }
+            }
+
+            return distances;
         }
     }
 }
