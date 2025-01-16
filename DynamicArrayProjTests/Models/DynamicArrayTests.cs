@@ -106,6 +106,54 @@ namespace DynamicArrayProj.Models.Tests
         }
 
         [TestMethod]
+        public void Remove_ExistingElement_ShouldReturnTrueAndDecreaseCount()
+        {
+            var dynamicArray = new DynamicArray<int>();
+            dynamicArray.Add(1);
+            dynamicArray.Add(2);
+            dynamicArray.Add(3);
+
+            bool result = dynamicArray.Remove(2);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(2, dynamicArray.Count);
+            Assert.AreEqual(1, dynamicArray[0]);
+            Assert.AreEqual(3, dynamicArray[1]);
+        }
+
+        [TestMethod]
+        public void Remove_NonExistingElement_ShouldReturnFalse()
+        {
+            var dynamicArray = new DynamicArray<int>();
+            dynamicArray.Add(1);
+            dynamicArray.Add(2);
+            dynamicArray.Add(3);
+
+            bool result = dynamicArray.Remove(4);
+
+            Assert.IsFalse(result);
+            Assert.AreEqual(3, dynamicArray.Count);
+        }
+
+        [TestMethod]
+        public void Remove_MultipleOccurrences_ShouldRemoveFirstOccurrence()
+        {
+            var dynamicArray = new DynamicArray<int>();
+            dynamicArray.Add(1);
+            dynamicArray.Add(2);
+            dynamicArray.Add(2);
+            dynamicArray.Add(3);
+
+            bool result = dynamicArray.Remove(2);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(3, dynamicArray.Count);
+            Assert.AreEqual(1, dynamicArray[0]);
+            Assert.AreEqual(2, dynamicArray[1]);
+            Assert.AreEqual(3, dynamicArray[2]);
+        }
+
+        [TestMethod]
         public void Capacity_ShouldDoubleWhenExceedingInitialCapacity()
         {
             var dynamicArray = new DynamicArray<int>();

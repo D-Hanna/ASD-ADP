@@ -100,6 +100,18 @@ namespace DynamicArrayProj.Models
             }
         }
 
+        public bool Remove(T item)
+        {
+            int index = Find(item);
+            if (index == -1)
+            {
+                return false;
+            }
+
+            RemoveAt(index);
+            return true;
+        }
+
         public void Clear()
         {
             _array = new T[DefaultCapacity];

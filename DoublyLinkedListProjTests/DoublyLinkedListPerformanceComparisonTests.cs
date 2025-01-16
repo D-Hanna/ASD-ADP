@@ -149,10 +149,10 @@ namespace DoublyLinkedListProj.Tests
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < 1000; i++)
             {
-                list.InsertAt(i, list.Count / 2);
+                list.Add(i, list.Count / 2);
             }
             stopwatch.Stop();
-            Console.WriteLine($"DoublyLinkedList InsertAt: {stopwatch.ElapsedMilliseconds} ms");
+            Console.WriteLine($"DoublyLinkedList Add: {stopwatch.ElapsedMilliseconds} ms");
 
             var normalList = new List<int>();
             foreach (var item in dataset)
@@ -337,7 +337,7 @@ namespace DoublyLinkedListProj.Tests
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < 1000; i++)
             {
-                doublyLinkedList.InsertAt(i, doublyLinkedList.Count / 2);
+                doublyLinkedList.Add(i, doublyLinkedList.Count / 2);
             }
             stopwatch.Stop();
             Console.WriteLine($"DoublyLinkedList InsertAt: {stopwatch.ElapsedMilliseconds} ms");

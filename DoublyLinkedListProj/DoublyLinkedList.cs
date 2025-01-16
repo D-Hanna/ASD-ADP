@@ -33,7 +33,7 @@ namespace DoublyLinkedListProj
             Count = 0;
         }
 
-        public void InsertAt(T data, int position)
+        public void Add(T data, int position = 0)
         {
             if (position < 0 || position > Count) throw new ArgumentOutOfRangeException(nameof(position));
 
@@ -74,6 +74,19 @@ namespace DoublyLinkedListProj
             }
 
             return current.Data;
+        }
+
+        public void Set(int position, T data)
+        {
+            if (position < 0 || position >= Count) throw new ArgumentOutOfRangeException(nameof(position));
+
+            Node current = head;
+            for (int i = 0; i < position; i++)
+            {
+                current = current.Next;
+            }
+
+            current.Data = data;
         }
 
         public void DeleteAt(int position)
@@ -165,6 +178,64 @@ namespace DoublyLinkedListProj
                 tail.Next = null;
             }
             Count--;
+        }
+
+        public bool Remove(T item)
+        {
+            Node current = head;
+            while (current != null)
+            {
+                if (current.Data.Equals(item))
+                {
+                    if (current == head)
+                    {
+                        RemoveFirst();
+                    }
+                    else if (current == tail)
+                    {
+                        RemoveLast();
+                    }
+                    else
+                    {
+                        current.Prev.Next = current.Next;
+                        current.Next.Prev = current.Prev;
+                        Count--;
+                    }
+                    return true;
+                }
+                current = current.Next;
+            }
+            return false;
+        }
+
+        public bool Contains(T item)
+        {
+            Node current = head;
+            while (current != null)
+            {
+                if (current.Data.Equals(item))
+                {
+                    return true;
+                }
+                current = current.Next;
+            }
+            return false;
+        }
+
+        public int Find(T item)
+        {
+            Node current = head;
+            int index = 0;
+            while (current != null)
+            {
+                if (current.Data.Equals(item))
+                {
+                    return index;
+                }
+                current = current.Next;
+                index++;
+            }
+            return -1;
         }
     }
 }

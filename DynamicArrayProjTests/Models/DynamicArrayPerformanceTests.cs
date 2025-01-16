@@ -125,6 +125,26 @@ namespace DynamicArrayProj.Models.Tests
         }
 
         [TestMethod()]
+        public void Performance_Remove()
+        {
+            var dataset = DataSets.LijstFloat8001;
+            var dynamicArray = new DynamicArray<object>();
+            foreach (var item in dataset)
+            {
+                dynamicArray.Add(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            foreach (var item in dataset)
+            {
+                dynamicArray.Remove(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"DynamicArray Remove: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, dynamicArray.Count);
+        }
+
+        [TestMethod()]
         public void Performance_Find()
         {
             var dataset = DataSets.LijstFloat8001;

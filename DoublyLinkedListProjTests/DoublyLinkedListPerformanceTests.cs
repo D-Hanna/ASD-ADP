@@ -85,7 +85,7 @@ namespace DoublyLinkedListProj.Tests
         }
 
         [TestMethod()]
-        public void Performance_InsertAt()
+        public void Performance_AddAt()
         {
             var dataset = DataSets.LijstFloat8001;
             var list = new DoublyLinkedList<object>();
@@ -97,10 +97,10 @@ namespace DoublyLinkedListProj.Tests
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < 1000; i++)
             {
-                list.InsertAt(i, list.Count / 2);
+                list.Add(i, list.Count / 2);
             }
             stopwatch.Stop();
-            Console.WriteLine($"InsertAt: {stopwatch.ElapsedMilliseconds} ms");
+            Console.WriteLine($"Add At: {stopwatch.ElapsedMilliseconds} ms");
         }
 
         [TestMethod()]
@@ -120,6 +120,82 @@ namespace DoublyLinkedListProj.Tests
             }
             stopwatch.Stop();
             Console.WriteLine($"DeleteAt: {stopwatch.ElapsedMilliseconds} ms");
+        }
+        [TestMethod()]
+        public void Performance_Remove()
+        {
+            var dataset = DataSets.LijstFloat8001;
+            var list = new DoublyLinkedList<object>();
+            foreach (var item in dataset)
+            {
+                list.AddLast(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            foreach (var item in dataset)
+            {
+                list.Remove(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"Remove: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, list.Count);
+        }
+
+        [TestMethod()]
+        public void Performance_Contains()
+        {
+            var dataset = DataSets.LijstFloat8001;
+            var list = new DoublyLinkedList<object>();
+            foreach (var item in dataset)
+            {
+                list.AddLast(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            foreach (var item in dataset)
+            {
+                list.Contains(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"Contains: {stopwatch.ElapsedMilliseconds} ms");
+        }
+
+        [TestMethod()]
+        public void Performance_Find()
+        {
+            var dataset = DataSets.LijstFloat8001;
+            var list = new DoublyLinkedList<object>();
+            foreach (var item in dataset)
+            {
+                list.AddLast(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            foreach (var item in dataset)
+            {
+                list.Find(item);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"Find: {stopwatch.ElapsedMilliseconds} ms");
+        }
+
+        [TestMethod()]
+        public void Performance_Set()
+        {
+            var dataset = DataSets.LijstFloat8001;
+            var list = new DoublyLinkedList<object>();
+            foreach (var item in dataset)
+            {
+                list.AddLast(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            for (int i = 0; i < list.Count; i++)
+            {
+                list.Set(i, dataset[i]);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"Set: {stopwatch.ElapsedMilliseconds} ms");
         }
     }
 }
