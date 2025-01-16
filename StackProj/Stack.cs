@@ -53,6 +53,16 @@ namespace StackProj
             return _items[_top];
         }
 
+        public T Top()
+        {
+            if (_top == -1)
+            {
+                throw new InvalidOperationException("Stack is empty. No items to return.");
+            }
+
+            return _items[_top];
+        }
+
         public bool IsEmpty()
         {
             return _top == -1;

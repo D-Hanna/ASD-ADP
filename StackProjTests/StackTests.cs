@@ -89,5 +89,25 @@ namespace StackProj.Tests
             stack.Push(2);
             Assert.AreEqual(2, stack.Count());
         }
+
+        [TestMethod]
+        public void TopTest()
+        {
+            var stack = new Stack<int>(5);
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+            var item = stack.Top();
+            Assert.AreEqual(3, item);
+            Assert.AreEqual(3, stack.Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TopTest_StackEmpty()
+        {
+            var stack = new Stack<int>(5);
+            stack.Top();
+        }
     }
 }

@@ -101,5 +101,24 @@ namespace StackProj.Tests
             stopwatch.Stop();
             Console.WriteLine($"Stack Count: {stopwatch.ElapsedMilliseconds} ms");
         }
+
+        [TestMethod]
+        public void Performance_Top()
+        {
+            var dataset = DataSets.LijstFloat8001;
+            var stack = new Stack<object>(dataset.Length);
+            foreach (var item in dataset)
+            {
+                stack.Push(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            for (int i = 0; i < dataset.Length; i++)
+            {
+                stack.Top();
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"Stack Top: {stopwatch.ElapsedMilliseconds} ms");
+        }
     }
 }
