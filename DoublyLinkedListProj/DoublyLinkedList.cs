@@ -182,10 +182,10 @@ namespace DoublyLinkedListProj
 
         public bool Remove(T item)
         {
-            Node current = head;
+            Node? current = head;
             while (current != null)
             {
-                if (current.Data.Equals(item))
+                if (current.Data != null && current.Data.Equals(item))
                 {
                     if (current == head)
                     {
@@ -197,8 +197,8 @@ namespace DoublyLinkedListProj
                     }
                     else
                     {
-                        current.Prev.Next = current.Next;
-                        current.Next.Prev = current.Prev;
+                        current.Prev!.Next = current.Next;
+                        current.Next!.Prev = current.Prev;
                         Count--;
                     }
                     return true;

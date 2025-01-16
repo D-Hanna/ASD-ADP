@@ -75,5 +75,28 @@ namespace HashTableProj.Tests
             stopwatch.Stop();
             Console.WriteLine($"Remove Time: {stopwatch.ElapsedMilliseconds} ms");
         }
+
+        [TestMethod]
+        public void Test_UpdatePerformance()
+        {
+            int NumberOfElements = 1000000;
+            var hashTable = new HashTable<int, string>(NumberOfElements);
+            var dataset = DataSets.RandomList(NumberOfElements).ToHashSet();
+
+            foreach (var item in dataset)
+            {
+                hashTable.Add(item, item.ToString());
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
+            foreach (var item in dataset)
+            {
+                hashTable.Update(item, "updated " + item.ToString());
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine($"Update Time: {stopwatch.ElapsedMilliseconds} ms");
+        }
     }
 }

@@ -87,5 +87,20 @@ namespace HashTableProj.Tests
             Assert.IsTrue(hashTable.TryGetValue(7, out var value7));
             Assert.AreEqual("seven", value7);
         }
+
+        [TestMethod]
+        public void Test_Update()
+        {
+            var hashTable = new HashTable<int, string>(10);
+            hashTable.Add(1, "one");
+            hashTable.Add(2, "two");
+            hashTable.Add(3, "three");
+
+            Assert.IsTrue(hashTable.Update(2, "updated two"));
+            Assert.IsTrue(hashTable.TryGetValue(2, out var value2));
+            Assert.AreEqual("updated two", value2);
+
+            Assert.IsFalse(hashTable.Update(4, "four"));
+        }
     }
 }

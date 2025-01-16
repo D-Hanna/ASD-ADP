@@ -79,20 +79,27 @@ namespace HashTableProj
             return false;
         }
 
-        public void PrintHashTable()
+        public bool Update(K key, V newValue)
         {
-            for (int i = 0; i < size; i++)
+            int index = GetBucketIndex(key);
+
+            if (buckets[index] != null)
             {
-                Console.Write($"Bucket {i}: ");
-                if (buckets[i] != null)
+                var current = buckets[index].First;
+                while (current != null)
                 {
-                    foreach (var pair in buckets[i])
+                    if (current.Value.Key.Equals(key))
                     {
-                        Console.Write($"[{pair.Key}: {pair.Value}] ");
+                        var newPair = new KeyValuePair<K, V>(key, newValue);
+                        buckets[index].AddBefore(current, newPair);
+                        buckets[index].Remove(current);
+                        return true;
                     }
+                    current = current.Next;
                 }
-                Console.WriteLine();
             }
+
+            return false;
         }
     }
 

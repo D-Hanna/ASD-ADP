@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace AVLSearchTreeProj
 {
-
-
     public class AVLTree
     {
         private AVLTreeNode Root;
@@ -123,12 +121,38 @@ namespace AVLSearchTreeProj
             return Search(node.Right, key);
         }
 
+        public int FindMin()
+        {
+            if (Root == null)
+                throw new InvalidOperationException("The tree is empty.");
+
+            return GetMinValueNode(Root).Key;
+        }
+
+        public int FindMax()
+        {
+            if (Root == null)
+                throw new InvalidOperationException("The tree is empty.");
+
+            return GetMaxValueNode(Root).Key;
+        }
+
         private AVLTreeNode GetMinValueNode(AVLTreeNode node)
         {
             AVLTreeNode current = node;
 
             while (current.Left != null)
                 current = current.Left;
+
+            return current;
+        }
+
+        private AVLTreeNode GetMaxValueNode(AVLTreeNode node)
+        {
+            AVLTreeNode current = node;
+
+            while (current.Right != null)
+                current = current.Right;
 
             return current;
         }
@@ -170,22 +194,5 @@ namespace AVLSearchTreeProj
 
             return y;
         }
-
-        public void InOrderTraversal()
-        {
-            InOrderTraversal(Root);
-            Console.WriteLine();
-        }
-
-        private void InOrderTraversal(AVLTreeNode node)
-        {
-            if (node != null)
-            {
-                InOrderTraversal(node.Left);
-                Console.Write(node.Key + " ");
-                InOrderTraversal(node.Right);
-            }
-        }
     }
-
 }

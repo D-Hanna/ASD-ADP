@@ -69,5 +69,45 @@ namespace AVLSearchTreeProj.Tests
 
             Console.WriteLine($"Time taken to search {NumberOfOperations} elements: {stopwatch.ElapsedMilliseconds} ms");
         }
+
+        [TestMethod]
+        public void FindMinPerformanceTest()
+        {
+            var tree = new AVLTree();
+            for (int i = 0; i < NumberOfOperations; i++)
+            {
+                tree.Insert(i);
+            }
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            for (int i = 0; i < NumberOfOperations; i++)
+            {
+                tree.FindMin();
+            }
+            stopwatch.Stop();
+
+            Console.WriteLine($"Time taken to find min {NumberOfOperations} times: {stopwatch.ElapsedMilliseconds} ms");
+        }
+
+        [TestMethod]
+        public void FindMaxPerformanceTest()
+        {
+            var tree = new AVLTree();
+            for (int i = 0; i < NumberOfOperations; i++)
+            {
+                tree.Insert(i);
+            }
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            for (int i = 0; i < NumberOfOperations; i++)
+            {
+                tree.FindMax();
+            }
+            stopwatch.Stop();
+
+            Console.WriteLine($"Time taken to find max {NumberOfOperations} times: {stopwatch.ElapsedMilliseconds} ms");
+        }
     }
 }

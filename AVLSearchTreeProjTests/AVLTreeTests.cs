@@ -75,20 +75,46 @@ namespace AVLSearchTreeProj.Tests
         }
 
         [TestMethod]
-        public void InOrderTraversalTest()
+        public void FindMinTest()
         {
             var tree = new AVLTree();
             tree.Insert(10);
             tree.Insert(20);
             tree.Insert(30);
+            tree.Insert(5);
+            tree.Insert(15);
 
-            using (var sw = new System.IO.StringWriter())
-            {
-                Console.SetOut(sw);
-                tree.InOrderTraversal();
-                var result = sw.ToString().Trim();
-                Assert.AreEqual("10 20 30", result);
-            }
+            Assert.AreEqual(5, tree.FindMin());
         }
+
+        [TestMethod]
+        public void FindMaxTest()
+        {
+            var tree = new AVLTree();
+            tree.Insert(10);
+            tree.Insert(20);
+            tree.Insert(30);
+            tree.Insert(5);
+            tree.Insert(15);
+
+            Assert.AreEqual(30, tree.FindMax());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void FindMinTest_EmptyTree()
+        {
+            var tree = new AVLTree();
+            tree.FindMin();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void FindMaxTest_EmptyTree()
+        {
+            var tree = new AVLTree();
+            tree.FindMax();
+        }
+
     }
 }

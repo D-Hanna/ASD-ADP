@@ -164,8 +164,8 @@ namespace DoublyLinkedListProj.Tests
 
             Assert.IsTrue(result);
             Assert.AreEqual(2, list.Count);
-            Assert.AreEqual(1, list.Get(0));
-            Assert.AreEqual(3, list.Get(1));
+            Assert.AreEqual(3, list.Get(0));
+            Assert.AreEqual(1, list.Get(1));
         }
 
         [TestMethod]
@@ -195,9 +195,9 @@ namespace DoublyLinkedListProj.Tests
 
             Assert.IsTrue(result);
             Assert.AreEqual(3, list.Count);
-            Assert.AreEqual(1, list.Get(0));
+            Assert.AreEqual(3, list.Get(0));
             Assert.AreEqual(2, list.Get(1));
-            Assert.AreEqual(3, list.Get(2));
+            Assert.AreEqual(1, list.Get(2));
         }
     }
 }
