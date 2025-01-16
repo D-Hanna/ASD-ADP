@@ -134,5 +134,42 @@ namespace DynamicArrayProj.Models.Tests
 
             Assert.AreEqual(4, dynamicArray.Capacity);
         }
+
+        [TestMethod]
+        public void TestSet()
+        {
+            var dynamicArray = new DynamicArray<int>();
+            dynamicArray.Add(1);
+            dynamicArray.Add(2);
+            dynamicArray.Add(3);
+
+            dynamicArray.Set(1, 5);
+
+            Assert.AreEqual(5, dynamicArray[1]);
+        }
+
+        [TestMethod]
+        public void TestContains()
+        {
+            var dynamicArray = new DynamicArray<int>();
+            dynamicArray.Add(1);
+            dynamicArray.Add(2);
+            dynamicArray.Add(3);
+
+            Assert.IsTrue(dynamicArray.Contains(2));
+            Assert.IsFalse(dynamicArray.Contains(4));
+        }
+
+        [TestMethod]
+        public void TestFind()
+        {
+            var dynamicArray = new DynamicArray<int>();
+            dynamicArray.Add(1);
+            dynamicArray.Add(2);
+            dynamicArray.Add(3);
+
+            Assert.AreEqual(1, dynamicArray.Find(2));
+            Assert.AreEqual(-1, dynamicArray.Find(4));
+        }
     }
 }

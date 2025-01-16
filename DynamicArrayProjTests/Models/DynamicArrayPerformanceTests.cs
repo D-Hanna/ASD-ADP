@@ -70,6 +70,23 @@ namespace DynamicArrayProj.Models.Tests
         }
 
         [TestMethod()]
+        public void Performance_Clear()
+        {
+            var dataset = DataSets.LijstFloat8001;
+            var dynamicArray = new DynamicArray<object>();
+            foreach (var item in dataset)
+            {
+                dynamicArray.Add(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            dynamicArray.Clear();
+            stopwatch.Stop();
+            Console.WriteLine($"DynamicArray Clear: {stopwatch.ElapsedMilliseconds} ms");
+            Assert.AreEqual(0, dynamicArray.Count);
+        }
+
+        [TestMethod()]
         public void Performance_Set()
         {
             var dataset = DataSets.LijstFloat8001;
@@ -89,7 +106,7 @@ namespace DynamicArrayProj.Models.Tests
         }
 
         [TestMethod()]
-        public void Performance_Clear()
+        public void Performance_Contains()
         {
             var dataset = DataSets.LijstFloat8001;
             var dynamicArray = new DynamicArray<object>();
@@ -99,10 +116,31 @@ namespace DynamicArrayProj.Models.Tests
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
-            dynamicArray.Clear();
+            for (int i = 0; i < dynamicArray.Count; i++)
+            {
+                dynamicArray.Contains(dataset[i]);
+            }
             stopwatch.Stop();
-            Console.WriteLine($"DynamicArray Clear: {stopwatch.ElapsedMilliseconds} ms");
-            Assert.AreEqual(0, dynamicArray.Count);
+            Console.WriteLine($"DynamicArray Contains: {stopwatch.ElapsedMilliseconds} ms");
+        }
+
+        [TestMethod()]
+        public void Performance_Find()
+        {
+            var dataset = DataSets.LijstFloat8001;
+            var dynamicArray = new DynamicArray<object>();
+            foreach (var item in dataset)
+            {
+                dynamicArray.Add(item);
+            }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            for (int i = 0; i < dynamicArray.Count; i++)
+            {
+                dynamicArray.Find(dataset[i]);
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"DynamicArray Find: {stopwatch.ElapsedMilliseconds} ms");
         }
     }
 }

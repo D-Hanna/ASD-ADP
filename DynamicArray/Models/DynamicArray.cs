@@ -39,6 +39,14 @@ namespace DynamicArrayProj.Models
             }
         }
 
+        public void Set(int index, T item)
+        {
+            if (index < 0 || index >= _count)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            _array[index] = item;
+        }
+
         public void Add(T item)
         {
             if (_count == _array.Length)
@@ -47,6 +55,30 @@ namespace DynamicArrayProj.Models
             }
 
             _array[_count++] = item;
+        }
+
+        public bool Contains(T item)
+        {
+            for (int i = 0; i < _count; i++)
+            {
+                if (_array[i].Equals(item))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int Find(T item)
+        {
+            for (int i = 0; i < _count; i++)
+            {
+                if (_array[i].Equals(item))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         public void RemoveAt(int index)
